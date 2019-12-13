@@ -10,7 +10,7 @@ export class HolaMundo extends LitElement {
   }
   render() {
     return html`
-      <p>Hola <b>${this.quien}</b>!!!</p>
+      <p>Hola <b>${this.quien}</b>!</p>
     `;
   }
 }

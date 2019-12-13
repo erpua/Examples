@@ -12,8 +12,8 @@ export class FeedbackElement extends LitElement {
       <style>
         div {
           position: fixed;
-          bottom: 0px;
-          left: 0px;
+          bottom: 100px;
+          left: 10%;
           overflow: hidden;
           height: 0px;
           display: flex;
@@ -26,13 +26,13 @@ export class FeedbackElement extends LitElement {
             rgba(0, 212, 255, 1) 100%
           );
           color: white;
-          width: 100%;
-          transition: all 1.5s ease-in;
+          width: 80%;
+          transition: all 1s ease-in;
           font-size: 1px;
         }
 
         .opened {
-          height: 100px;
+          height: 50px;
           font-size: 2em;
         }
       </style>
@@ -47,7 +47,7 @@ export class FeedbackElement extends LitElement {
     this.msg = mensaje;
     this.opened = true;
 
-    setTimeout(() => (this.opened = false), 3000);
+    setTimeout(() => (this.opened = false), 2000);
   }
 }
 customElements.define("feedback-element", FeedbackElement);

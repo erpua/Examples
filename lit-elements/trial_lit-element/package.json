@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graviton/dropdown": "^1.1.5",
     "lit-element": "^2.2.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
