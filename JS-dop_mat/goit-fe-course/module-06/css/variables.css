@@ -1,0 +1,15 @@
+:root {
+    --theme-color-main: #95E1D3;
+    --theme-color-accent: #F38181;
+    --theme-color-accent-tr: rgba(243, 129, 129, 0.9);
+    --theme-color-accent-secondary: #FCE38A;
+    --theme-color-accent-secondary-tr: rgba(252, 227, 138, 0.9);
+    --theme-color-social: #EAFFD0;
+    --theme-color-header: #333333;
+    --theme-color-text: #999999;
+    --theme-ff-base: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* 300i,400 */
+    --theme-ff-header: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* 400,700 */
+    --theme-ff-cursive: 'Kaushan Script', cursive;
+}
