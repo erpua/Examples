@@ -25,13 +25,11 @@ export class SearcherElement extends LitElement {
       </style>
       <form>
         <input
+          @input="${this.showCountriesData}"
           type="text"
           class="input-name input-js"
           placeholder="Write the country name..."
         />
-        <button @click="${this.showCountriesData}">
-          Build and console first country
-        </button>
         <ul class="alert-list"></ul>
         <section class="country-description country-description-js"></section>
       </form>
@@ -40,10 +38,26 @@ export class SearcherElement extends LitElement {
 
   async showCountriesData(event) {
     event.preventDefault();
-
     const list = this.shadowRoot.querySelector(".country-description-js");
+    const input = this.shadowRoot.querySelector("input");
+    const inputValue = input.value.toLowerCase();
 
-    fetchAndLogCountries().then(data => console.log(data));
+    const countryNamesData = await fetchAndLogCountries().then(data =>
+      data.map(country => country.name)
+    );
+    console.log("countryNamesData:", countryNamesData);
+
+    const lettersOfName = countryNamesData.map(i => i.split(""));
+    console.log("lettersOfName:", lettersOfName);
+
+    /*  
+   
+   // METHOD OF MATCHING INPUT.VALUE WITH COUNTRY.NAME ONE BY ONE
+   
+   if (inputValue === lettersOfName) {
+    } 
+    
+    */
 
     const markupCountry = await fetchAndLogCountries().then(data => {
       return data
