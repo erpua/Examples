@@ -1,0 +1,29 @@
+import { LitElement, html } from "lit-element";
+
+export default class CountryDescription extends LitElement {
+  render() {
+    return html`
+      <p class="country-name">{{name}}</p>
+      <div class="description">
+        <div>
+          <p><span class="headline">Capital:</span> {{capital}}</p>
+          <p><span class="headline">Population:</span> {{population}}</p>
+          <!--  <p><span class="headline">Languages:</span>
+      <ul>
+        {{#each languages}}
+        <li>{{this.name}}</li>
+        {{/each}}
+      </ul>
+    </p> -->
+        </div>
+        <img
+          src="{{flag}}"
+          alt="This is the flag!"
+          class="flag"
+          width="300px"
+        />
+      </div>
+    `;
+  }
+}
+customElements.define("country-description", CountryDescription);

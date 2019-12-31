@@ -23,32 +23,52 @@ export class SearcherElement extends LitElement {
           border-radius: 20px;
         }
       </style>
-      <form name="form1">
-        <input type="text" placeholder="Write the country name..." />
+      <form>
+        <input
+          type="text"
+          class="input-name input-js"
+          placeholder="Write the country name..."
+        />
         <button @click="${this.showCountriesData}">
-          Fetch and log countries
+          Build and console first country
         </button>
-
-        <textarea
-          class="data-base"
-          name="area"
-          rows="40"
-          cols="90"
-          name="description"
-        ></textarea>
+        <ul class="alert-list"></ul>
+        <section class="country-description country-description-js"></section>
       </form>
     `;
   }
 
-  showCountriesData(event) {
+  async showCountriesData(event) {
     event.preventDefault();
-    fetchAndLogCountries();
-    const textArea = this.shadowRoot.querySelector(".data-base");
-    const baseUrl = "https://restcountries.eu/rest/v2/";
-    const countriesData = fetch(baseUrl).then(response =>
-      console.log("---", response.json())
-    );
-    textArea.textContent = JSON.stringify(countriesData);
+
+    const list = this.shadowRoot.querySelector(".country-description-js");
+
+    fetchAndLogCountries().then(data => console.log(data));
+
+    const markupCountry = await fetchAndLogCountries().then(data => {
+      return data
+        .map(country => {
+          return `<p class="country-name">${country.name}</p>
+          <div class="description">
+            <div>
+             <p><span class="headline">Capital:</span> ${country.capital}</p>
+              <p><span class="headline">Population:</span> ${
+                country.population
+              }</p>
+              Languages:
+              ${country.languages
+                .map(language => `<li>${language.name}</li>`)
+                .join(" ")}
+            </div>
+            <img src="${
+              country.flag
+            }" alt="This is the flag!" class="flag" width="300px">
+          </div>`;
+        })
+        .join(" ");
+    });
+
+    list.insertAdjacentHTML("beforeend", markupCountry);
   }
 }
 customElements.define("searcher-element", SearcherElement);

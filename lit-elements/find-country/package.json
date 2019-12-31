@@ -9,6 +9,10 @@
   "author": "Yevgeniy Tovtin",
   "license": "ISC",
   "dependencies": {
-    "lit-element": "^2.2.1"
+    "lit-element": "^2.2.1",
+    "repeat": "^1.2.0"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^2.4.0"
   }
 }

@@ -1,7 +1,15 @@
-const fetchAndLogCountries = async () => {
-  const response = await fetch("https://restcountries.eu/rest/v2/");
-  const json = await response.json();
-  console.log(json);
-};
+/*  SIMPLE FETCH()
+const baseUrl = "https://restcountries.eu/rest/v2/";
+const fetchAndLogCountries = () =>
+  fetch(baseUrl).then(response => response.json());
+export { fetchAndLogCountries };
+ */
+const baseUrl = "https://restcountries.eu/rest/v2/";
+
+async function fetchAndLogCountries() {
+  const response = await fetch(baseUrl);
+  const data = await response.json();
+  return data;
+}
 
 export { fetchAndLogCountries };
