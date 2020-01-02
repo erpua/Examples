@@ -1,0 +1,27 @@
+.backdrop {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: teal;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+body.modal-visible .backdrop {
+    opacity: 1;
+    visibility: visible;
+}
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: wheat;
+    max-width: 500px;
+    min-height: 200px;
+    padding: 16px;
+}
