@@ -1,7 +1,8 @@
 import { LitElement, html } from "lit-element";
 import { fetchAndLogCountries } from "./services/api";
-import { NotificationElement } from "../node_modules/@vaadin/vaadin-notification/vaadin-notification.js";
-/* import { NotificationElement } from "../node_modules/@vaadin/vaadin-notification/vaadin-notification.js"; */
+import { pWarning, pNotice } from "./utils/pnotify";
+import { messages } from "./utils/messages";
+import { debounce } from "../node_modules/lodash.debounce/index.js";
 
 export class SearcherElement extends LitElement {
   render() {
@@ -14,7 +15,7 @@ export class SearcherElement extends LitElement {
           font-size: 24px;
           padding: 14px;
           border-radius: 20px;
-          border: solid 2px black;
+          border: dotted 2px black;
         }
 
         button {
@@ -24,17 +25,54 @@ export class SearcherElement extends LitElement {
           height: 30px;
           border-radius: 20px;
         }
+
+        form {
+          max-width: 600px;
+          margin: 100px auto;
+        }
+
+        .country__description--css {
+          background-image: linear-gradient(
+              rgba(0, 0, 0, 0.1),
+              rgba(0, 0, 0, 0.1)
+            ),
+            url("https://i.postimg.cc/fW1XCQPW/winter-bckrnd.jpg");
+          background-size: cover;
+          border-radius: 10px;
+        }
+
+        .country-name {
+          text-align: center;
+          font-size: 40px;
+          font-weight: bold;
+        }
+
+        .headline {
+          font-weight: bold;
+          font-size: 20px;
+          margin-left: 20px;
+        }
+
+        img {
+          margin: 20px;
+        }
+
+        ul {
+          list-style: none;
+        }
       </style>
+
       <form>
         <input
-          @input="${this.showCountriesData}"
+          @input="${debounce(this.showCountriesData, 500)}"
           type="text"
           class="input-name input-js"
           placeholder="Write the country name..."
         />
         <ul class="alert-list"></ul>
-
-        <section class="country-description country-description-js"></section>
+        <section
+          class="country__description--css country__description--js"
+        ></section>
       </form>
     `;
   }
@@ -47,10 +85,11 @@ export class SearcherElement extends LitElement {
               <p><span class="headline">Population:</span> ${
                 country.population
               }</p>
-              Languages:
+               <p><span class="headline">Languages:</span></p>
+              <ul>
               ${country.languages
                 .map(language => `<li>${language.name}</li>`)
-                .join(" ")}
+                .join(" ")}</ul>
             </div>
             <img src="${
               country.flag
@@ -66,7 +105,7 @@ export class SearcherElement extends LitElement {
   removeListItems() {
     const alertList = this.shadowRoot.querySelector(".alert-list");
     alertList.innerHTML = "";
-    const list = this.shadowRoot.querySelector(".country-description-js");
+    const list = this.shadowRoot.querySelector(".country__description--js");
     list.innerHTML = "";
   }
 
@@ -83,15 +122,15 @@ export class SearcherElement extends LitElement {
       )
       .then(result => {
         const resultArr = Array.from(result);
-        console.log("resultArr:", resultArr);
         if (resultArr.length === 0) {
-          console.log("warningMissingMatches");
-          this.NotificationElement.open();
+          pWarning(messages.warningMissingMatches);
         } else if (inputValue.length === 0) {
           this.removeListItems();
         } else if (resultArr.length === 1) {
           this.removeListItems();
-          const list = this.shadowRoot.querySelector(".country-description-js");
+          const list = this.shadowRoot.querySelector(
+            ".country__description--js"
+          );
           list.insertAdjacentHTML("beforeend", this.markupCountry(result[0]));
         } else if (resultArr.length > 1 && resultArr.length <= 10) {
           this.removeListItems();
@@ -102,7 +141,7 @@ export class SearcherElement extends LitElement {
           );
         } else {
           this.removeListItems();
-          console.log("warningTooManyMatches");
+          pNotice(messages.warningTooManyMatches);
         }
       });
   }
