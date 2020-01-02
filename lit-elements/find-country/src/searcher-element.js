@@ -1,5 +1,7 @@
 import { LitElement, html } from "lit-element";
 import { fetchAndLogCountries } from "./services/api";
+import { NotificationElement } from "../node_modules/@vaadin/vaadin-notification/vaadin-notification.js";
+/* import { NotificationElement } from "../node_modules/@vaadin/vaadin-notification/vaadin-notification.js"; */
 
 export class SearcherElement extends LitElement {
   render() {
@@ -31,6 +33,7 @@ export class SearcherElement extends LitElement {
           placeholder="Write the country name..."
         />
         <ul class="alert-list"></ul>
+
         <section class="country-description country-description-js"></section>
       </form>
     `;
@@ -51,8 +54,7 @@ export class SearcherElement extends LitElement {
             </div>
             <img src="${
               country.flag
-            }" alt="This is the flag!" class="flag" width="300px">
-          </div>`;
+            }" alt="This is the flag!" class="flag" width="300px"></div>`;
   }
 
   markupCountriesNames(country) {
@@ -84,6 +86,7 @@ export class SearcherElement extends LitElement {
         console.log("resultArr:", resultArr);
         if (resultArr.length === 0) {
           console.log("warningMissingMatches");
+          this.NotificationElement.open();
         } else if (inputValue.length === 0) {
           this.removeListItems();
         } else if (resultArr.length === 1) {

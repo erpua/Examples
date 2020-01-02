@@ -9,6 +9,7 @@
   "author": "Yevgeniy Tovtin",
   "license": "ISC",
   "dependencies": {
+    "@vaadin/vaadin-notification": "^1.4.0",
     "lit-element": "^2.2.1",
     "repeat": "^1.2.0"
   },
