@@ -1,1 +1,1 @@
-import "./searcher-element.js";
+import "./searcher-element";
