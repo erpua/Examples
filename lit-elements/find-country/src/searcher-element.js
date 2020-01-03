@@ -42,6 +42,12 @@ export class SearcherElement extends LitElement {
           text-align: center;
           font-size: 40px;
           font-weight: bold;
+          transition: all 0.637s ease-in-out;
+        }
+
+        .country-name:hover {
+          color: grey;
+          background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
         }
 
         .headline {
@@ -101,10 +107,18 @@ export class SearcherElement extends LitElement {
 
   markupCountriesNames(country) {
     return `${country
-      .map(country => `<div class="country-name">${country.name}</div>`)
+      .map(
+        country =>
+          `<div class="country-name @click=${this.qwe(country.name)}">${
+            country.name
+          }</div>`
+      )
       .join(" ")}`;
   }
 
+  qwe(countryName) {
+    console.log(countryName);
+  }
   removeListItems() {
     const alertList = this.shadowRoot.querySelector(".alert-list");
     alertList.innerHTML = "";
