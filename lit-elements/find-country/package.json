@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production"
   },
   "author": "Yevgeniy Tovtin",
   "license": "ISC",
@@ -17,6 +17,8 @@
     "repeat": "^1.2.0"
   },
   "devDependencies": {
-    "@webcomponents/webcomponentsjs": "^2.4.0"
+    "@webcomponents/webcomponentsjs": "^2.4.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   }
 }
