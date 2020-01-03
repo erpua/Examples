@@ -42,12 +42,33 @@ export class SearcherElement extends LitElement {
           text-align: center;
           font-size: 40px;
           font-weight: bold;
-          transition: all 0.637s ease-in-out;
+          border-radius: 4px;
+          box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+          transition: transform 0.15s ease-in, box-shadow 0.3s linear,
+            border-radius linear, background linear;
+          /* transition: all 0.5s ease-in-out; */
         }
 
         .country-name:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
+          border-radius: 10px;
+          background: linear-gradient(
+            90deg,
+            rgba(10, 0, 36, 1) 0%,
+            rgba(9, 74, 121, 1) 35%,
+            rgba(0, 212, 255, 1) 100%
+          );
+          /*   transform: scale(1.05);
           color: grey;
-          background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+          background: linear-gradient(
+            90deg,
+            rgba(10, 0, 36, 1) 0%,
+            rgba(9, 74, 121, 1) 35%,
+            rgba(0, 212, 255, 1) 100%
+          );
+          border-radius: 20px;
+          padding: 2px; */
         }
 
         .headline {
