@@ -1,8 +1,5 @@
 import { LitElement, html } from "lit-element";
 import { fetchAndLogCountries } from "./services/api";
-import { pWarning, pNotice } from "./utils/pnotify";
-import { messages } from "./utils/messages";
-import { debounce } from "../node_modules/lodash.debounce/index.js";
 
 export class SearcherElement extends LitElement {
   render() {
@@ -64,7 +61,7 @@ export class SearcherElement extends LitElement {
 
       <form>
         <input
-          @input="${debounce(this.showCountriesData, 500)}"
+          @input="${this.showCountriesData}"
           type="text"
           class="input-name input-js"
           placeholder="Write the country name..."
@@ -74,7 +71,13 @@ export class SearcherElement extends LitElement {
           class="country__description--css country__description--js"
         ></section>
       </form>
+
+      <alert-matches-element class="match-alert"></alert-matches-element>
     `;
+  }
+
+  get matchAlert() {
+    return this.shadowRoot.querySelector(".match-alert");
   }
 
   markupCountry(country) {
@@ -123,7 +126,7 @@ export class SearcherElement extends LitElement {
       .then(result => {
         const resultArr = Array.from(result);
         if (resultArr.length === 0) {
-          pWarning(messages.warningMissingMatches);
+          this.matchAlert.open("No matches!");
         } else if (inputValue.length === 0) {
           this.removeListItems();
         } else if (resultArr.length === 1) {
@@ -141,7 +144,7 @@ export class SearcherElement extends LitElement {
           );
         } else {
           this.removeListItems();
-          pNotice(messages.warningTooManyMatches);
+          this.matchAlert.open("Too many matches!");
         }
       });
   }
