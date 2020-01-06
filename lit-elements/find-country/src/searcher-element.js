@@ -38,6 +38,12 @@ export class SearcherElement extends LitElement {
           border-radius: 10px;
         }
 
+        .country__name--markup {
+          text-align: center;
+          font-size: 40px;
+          font-weight: bold;
+        }
+
         .country-name {
           text-align: center;
           font-size: 40px;
@@ -97,7 +103,17 @@ export class SearcherElement extends LitElement {
   }
 
   markupCountry(country) {
-    return `<p class="country-name">${country.name}</p>
+    /*  console.log("country:", country); */
+    /*  this.shadowRoot.querySelector(".alert-list").innerHTML = ""; */
+    /* this.removeListItems(); 
+    
+    
+  
+    
+    
+    */
+    return `  
+    <p class="country__name--markup">${country.name}</p>
           <div class="description">
             <div>
              <p><span class="headline">Capital:</span> ${country.capital}</p>
@@ -120,9 +136,6 @@ export class SearcherElement extends LitElement {
       .map(country => `<div class="country-name">${country.name}</div>`)
       .join(" ")}`;
 
-    const qwe = this.shadowRoot.querySelector(".country-name");
-    console.log("qwe:", qwe);
-
     return markup;
   }
 
@@ -131,6 +144,8 @@ export class SearcherElement extends LitElement {
     alertList.innerHTML = "";
     const list = this.shadowRoot.querySelector(".country__description--js");
     list.innerHTML = "";
+    const allCountries = this.shadowRoot.querySelectorAll(".country-name");
+    allCountries.innerHTML = "";
   }
 
   async showCountriesData(event) {
@@ -146,6 +161,8 @@ export class SearcherElement extends LitElement {
       )
       .then(result => {
         const resultArr = Array.from(result);
+        /*  console.log("res = ", resultArr); */
+
         if (resultArr.length === 0) {
           this.matchAlert.open("No matches!");
         } else if (inputValue.length === 0) {
@@ -158,15 +175,42 @@ export class SearcherElement extends LitElement {
           list.insertAdjacentHTML("beforeend", this.markupCountry(result[0]));
         } else if (resultArr.length > 1 && resultArr.length <= 10) {
           this.removeListItems();
-          const aux = this.markupCountriesNames(result);
           const alertList = this.shadowRoot.querySelector(".alert-list");
-          alertList.insertAdjacentHTML("beforeend", aux);
+          alertList.insertAdjacentHTML(
+            "beforeend",
+            this.markupCountriesNames(result)
+          );
 
           const allCountries = this.shadowRoot.querySelectorAll(
             ".country-name"
           );
-          console.log("All Countries:", allCountries);
-          console.log("allCountries[0]:", allCountries[0]);
+
+          const arrayFormCountries = Array.from(allCountries);
+          /*  console.log("arrayFormCountries:", arrayFormCountries); */
+          arrayFormCountries.map((i, index) =>
+            i.addEventListener("click", event => {
+              arrayFormCountries.innerHTML = "";
+              /*   console.log("Event => ", event, index); */
+              /* console.log(
+                "event.target.textContent:",
+                event.target.textContent
+              ); */
+              /*  console.log("i.textContent:", i.textContent); */
+              if (event.target.textContent === i.textContent) {
+                this.removeListItems();
+                /*  console.log(" should be clicked country:", event.target); */
+                /* console.log(
+                  "ARRAY OF ALL COUNTRUES INCLUDED THIS LITERAS:",
+                  result
+                ); */
+                const alertList = this.shadowRoot.querySelector(".alert-list");
+                alertList.insertAdjacentHTML(
+                  "beforeend",
+                  this.markupCountry(result[index])
+                );
+              }
+            })
+          );
         } else {
           this.removeListItems();
           this.matchAlert.open("Too many matches!");
