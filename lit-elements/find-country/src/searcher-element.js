@@ -25,7 +25,7 @@ export class SearcherElement extends LitElement {
 
         form {
           max-width: 600px;
-          margin: 100px auto;
+          margin: 40px auto;
         }
 
         .country__description--css {
@@ -59,16 +59,6 @@ export class SearcherElement extends LitElement {
             rgba(9, 74, 121, 1) 35%,
             rgba(0, 212, 255, 1) 100%
           );
-          /*   transform: scale(1.05);
-          color: grey;
-          background: linear-gradient(
-            90deg,
-            rgba(10, 0, 36, 1) 0%,
-            rgba(9, 74, 121, 1) 35%,
-            rgba(0, 212, 255, 1) 100%
-          );
-          border-radius: 20px;
-          padding: 2px; */
         }
 
         .headline {
