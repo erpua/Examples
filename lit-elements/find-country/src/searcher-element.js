@@ -46,7 +46,6 @@ export class SearcherElement extends LitElement {
           box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
           transition: transform 0.15s ease-in, box-shadow 0.3s linear,
             border-radius linear, background linear;
-          /* transition: all 0.5s ease-in-out; */
         }
 
         .country-name:hover {
@@ -117,19 +116,16 @@ export class SearcherElement extends LitElement {
   }
 
   markupCountriesNames(country) {
-    return `${country
-      .map(
-        country =>
-          `<div class="country-name @click=${this.qwe(country.name)}">${
-            country.name
-          }</div>`
-      )
+    const markup = `${country
+      .map(country => `<div class="country-name">${country.name}</div>`)
       .join(" ")}`;
+
+    /*  const countryName = this.shadowRoot.querySelectorAll(".country-name");
+    console.log("countryName:", countryName); */
+
+    return `<div id="countries">${markup}</div>`;
   }
 
-  qwe(countryName) {
-    console.log(countryName);
-  }
   removeListItems() {
     const alertList = this.shadowRoot.querySelector(".alert-list");
     alertList.innerHTML = "";
@@ -162,11 +158,17 @@ export class SearcherElement extends LitElement {
           list.insertAdjacentHTML("beforeend", this.markupCountry(result[0]));
         } else if (resultArr.length > 1 && resultArr.length <= 10) {
           this.removeListItems();
+          const aux = this.markupCountriesNames(result);
           const alertList = this.shadowRoot.querySelector(".alert-list");
-          alertList.insertAdjacentHTML(
-            "beforeend",
-            this.markupCountriesNames(result)
-          );
+          alertList.insertAdjacentHTML("beforeend", aux);
+
+          const countryName = this.shadowRoot.querySelectorAll(".country-name");
+          console.log("countryName:", countryName);
+          /*   console.log(aux); */
+
+          /*  result.map(chosenCountryName =>
+            this.markupChosenCountryName(chosenCountryName)
+          ); */
         } else {
           this.removeListItems();
           this.matchAlert.open("Too many matches!");
@@ -175,3 +177,9 @@ export class SearcherElement extends LitElement {
   }
 }
 customElements.define("searcher-element", SearcherElement);
+
+/*  markupChosenCountry() {
+    console.log("country.name:");
+    const chosenCountry = this.shadowRoot.querySelector(".country-name");
+    console.log("chosenCountry.", chosenCountry);
+  } */
