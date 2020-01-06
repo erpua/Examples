@@ -120,10 +120,10 @@ export class SearcherElement extends LitElement {
       .map(country => `<div class="country-name">${country.name}</div>`)
       .join(" ")}`;
 
-    /*  const countryName = this.shadowRoot.querySelectorAll(".country-name");
-    console.log("countryName:", countryName); */
+    const qwe = this.shadowRoot.querySelector(".country-name");
+    console.log("qwe:", qwe);
 
-    return `<div id="countries">${markup}</div>`;
+    return markup;
   }
 
   removeListItems() {
@@ -162,13 +162,11 @@ export class SearcherElement extends LitElement {
           const alertList = this.shadowRoot.querySelector(".alert-list");
           alertList.insertAdjacentHTML("beforeend", aux);
 
-          const countryName = this.shadowRoot.querySelectorAll(".country-name");
-          console.log("countryName:", countryName);
-          /*   console.log(aux); */
-
-          /*  result.map(chosenCountryName =>
-            this.markupChosenCountryName(chosenCountryName)
-          ); */
+          const allCountries = this.shadowRoot.querySelectorAll(
+            ".country-name"
+          );
+          console.log("All Countries:", allCountries);
+          console.log("allCountries[0]:", allCountries[0]);
         } else {
           this.removeListItems();
           this.matchAlert.open("Too many matches!");
@@ -177,9 +175,3 @@ export class SearcherElement extends LitElement {
   }
 }
 customElements.define("searcher-element", SearcherElement);
-
-/*  markupChosenCountry() {
-    console.log("country.name:");
-    const chosenCountry = this.shadowRoot.querySelector(".country-name");
-    console.log("chosenCountry.", chosenCountry);
-  } */
