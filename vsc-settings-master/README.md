@@ -50,3 +50,33 @@
 - Template Literal Editor
 - Terminal
 - Trailing Spaces
+
+other way
+
+{
+"files.autoSave": "onWindowChange",
+"window.menuBarVisibility": "default",
+"window.zoomLevel": 0,
+"emmet.triggerExpansionOnTab": true,
+"editor.renderWhitespace": "all",
+"editor.multiCursorModifier": "ctrlCmd",
+"editor.snippetSuggestions": "top",
+"editor.formatOnPaste": true,
+"css.validate": false,
+"scss.validate": false,
+"editor.detectIndentation": false,
+"editor.folding": true,
+"editor.glyphMargin": false,
+"editor.smoothScrolling": true,
+"workbench.statusBar.feedback.visible": false,
+"editor.minimap.enabled": false,
+"workbench.editor.tabSizing": "shrink",
+"editor.fontSize": 14,
+"editor.tabSize": 2,
+"editor.wordWrapColumn": 60,
+"editor.formatOnSave": true,
+"[javascript]": {
+"editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"editor.wordWrap": "wordWrapColumn"
+}
