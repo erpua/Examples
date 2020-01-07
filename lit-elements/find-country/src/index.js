@@ -1,2 +1,2 @@
-import "./searcher-element";
-import "./alert-matches-element";
+import "./searcher-element.js";
+import "./alert-matches-element.js";
