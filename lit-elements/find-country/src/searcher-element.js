@@ -103,15 +103,6 @@ export class SearcherElement extends LitElement {
   }
 
   markupCountry(country) {
-    /*  console.log("country:", country); */
-    /*  this.shadowRoot.querySelector(".alert-list").innerHTML = ""; */
-    /* this.removeListItems(); 
-    
-    
-  
-    
-    
-    */
     return `  
     <p class="country__name--markup">${country.name}</p>
           <div class="description">
@@ -161,8 +152,6 @@ export class SearcherElement extends LitElement {
       )
       .then(result => {
         const resultArr = Array.from(result);
-        /*  console.log("res = ", resultArr); */
-
         if (resultArr.length === 0) {
           this.matchAlert.open("No matches!");
         } else if (inputValue.length === 0) {
@@ -184,27 +173,18 @@ export class SearcherElement extends LitElement {
           const allCountries = this.shadowRoot.querySelectorAll(
             ".country-name"
           );
-
           const arrayFormCountries = Array.from(allCountries);
-          /*  console.log("arrayFormCountries:", arrayFormCountries); */
+
           arrayFormCountries.map((i, index) =>
             i.addEventListener("click", event => {
               arrayFormCountries.innerHTML = "";
-              /*   console.log("Event => ", event, index); */
-              /* console.log(
-                "event.target.textContent:",
-                event.target.textContent
-              ); */
-              /*  console.log("i.textContent:", i.textContent); */
               if (event.target.textContent === i.textContent) {
                 this.removeListItems();
-                /*  console.log(" should be clicked country:", event.target); */
-                /* console.log(
-                  "ARRAY OF ALL COUNTRUES INCLUDED THIS LITERAS:",
-                  result
-                ); */
-                const alertList = this.shadowRoot.querySelector(".alert-list");
-                alertList.insertAdjacentHTML(
+
+                const list = this.shadowRoot.querySelector(
+                  ".country__description--js"
+                );
+                list.insertAdjacentHTML(
                   "beforeend",
                   this.markupCountry(result[index])
                 );
