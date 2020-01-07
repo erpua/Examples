@@ -49,21 +49,23 @@ export class SearcherElement extends LitElement {
           font-size: 40px;
           font-weight: bold;
           border-radius: 4px;
+          margin: 6px 0;
           box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
-          transition: transform 0.15s ease-in, box-shadow 0.3s linear,
+          transition: transform 200ms ease-in-out, box-shadow 0.2s linear,
             border-radius linear, background linear;
         }
 
         .country-name:hover {
-          transform: scale(1.05);
-          box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
-          border-radius: 10px;
+          transform: scale(1.03);
+          box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.4);
+          border-radius: 8px;
           background: linear-gradient(
             90deg,
             rgba(10, 0, 36, 1) 0%,
             rgba(9, 74, 121, 1) 35%,
             rgba(0, 212, 255, 1) 100%
           );
+          border: none;
         }
 
         .headline {
@@ -74,6 +76,12 @@ export class SearcherElement extends LitElement {
 
         img {
           margin: 20px;
+        }
+
+        .mini__flag--logo {
+          display: inline-block;
+          margin: 0;
+          padding: 0;
         }
 
         ul {
@@ -124,7 +132,11 @@ export class SearcherElement extends LitElement {
 
   markupCountriesNames(country) {
     const markup = `${country
-      .map(country => `<div class="country-name">${country.name}</div>`)
+      .map(
+        country => `<div class="country-name">${country.name} 
+     <img class="mini__flag--logo" src="${country.flag}" alt="This is the flag!" class="flag" width="40px">
+      </div>`
+      )
       .join(" ")}`;
 
     return markup;
